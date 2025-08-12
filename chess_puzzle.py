@@ -19,7 +19,17 @@ class Piece:
     side : bool #True for White and False for Black
     def __init__(self, pos_X : int, pos_Y : int, side_ : bool):
         '''implement according to specification'''
+        self.pos_x = pos_X
+        self.pos_y = pos_Y
+        self.side = side_
 
+    def __str__(self):
+        side = "White" if self.side else "Black"
+        return f"{side} {type(self).__name__} at {(self.pos_x, self.pos_y)}/{index2location(self.pos_x, self.pos_y)}"
+
+    def __repr__(self):
+        side = "w" if self.side else "b"
+        return f"{type(self).__name__[0]}{index2location(self.pos_x, self.pos_y)}{side}"
 
 Board = tuple[int, list[Piece]]
 
