@@ -1,9 +1,17 @@
+import copy
+
 def location2index(loc: str) -> tuple[int, int]:
     '''implement according to specification'''
+    x = ord(loc[0]) - 96
+    y = int(loc[1:])
+    return ((x, y))
     
 	
 def index2location(x: int, y: int) -> str:
     '''converts  pair of coordinates to corresponding location'''
+    loc = chr(x + 96) + str(y)
+    return loc
+
 
 class Piece:
     pos_x : int	
@@ -68,7 +76,7 @@ def conf2unicode(B: Board) -> str:
 
 
 def main() -> None:
-    '''implement according to specification'''    
+    '''implement according to specification''' 
 
 if __name__ == '__main__': #keep this in
    main()
