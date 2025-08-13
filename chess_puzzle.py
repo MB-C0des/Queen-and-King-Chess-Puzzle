@@ -231,6 +231,23 @@ def is_check(side: bool, B: Board) -> bool:
 
 def is_checkmate(side: bool, B: Board) -> bool:
     '''implement according to specification'''
+    pieces = B[1]
+
+    if not is_check(side, B):
+        # Cannot be checkmate if not in check
+        return False
+
+    # Find the King on this side
+    king = None
+
+    for piece in pieces:
+        piece_type = type(piece).__name__
+        if piece_type == "King" and piece.side == side:
+            king = piece
+            break
+
+    # Check if the King is unable to move, if so return True
+    return king.is_unable_to_move(B)
 
 def is_stalemate(side: bool, B: Board) -> bool:
     '''implement according to specification'''
