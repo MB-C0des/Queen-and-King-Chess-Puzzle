@@ -160,6 +160,21 @@ class King(Piece):
     
     def can_move_to(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
+        # Check if can move to the position
+        if not self.can_reach(pos_X, pos_Y, B):
+            return False
+        
+        # Move piece to the position and check if it results in a checkmate
+        new_board = copy.deepcopy(B)
+        new_piece = piece_at(self.pos_x, self.pos_y, new_board)
+        new_piece.pos_x = pos_X
+        new_piece.pos_y = pos_Y
+
+        if is_check(self.side, new_board):
+            return False
+
+        return True
+
     def move_to(self, pos_X : int, pos_Y : int, B: Board) -> Board:
         '''implement according to specification'''
 
