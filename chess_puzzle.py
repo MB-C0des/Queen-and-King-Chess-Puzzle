@@ -60,6 +60,12 @@ class Queen(Piece):
 
         dx = pos_X - x
         dy = pos_Y - y
+        
+        # Check if NOT vertical, horizontal or diagonal
+        if not (x == pos_X or y == pos_Y or abs(dx) == abs(dy)):
+            return False
+
+        pointsInBetween = []
 
     def can_move_to(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
