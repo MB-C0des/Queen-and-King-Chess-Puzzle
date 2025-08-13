@@ -91,6 +91,32 @@ class Queen(Piece):
 
     def can_move_to(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
+        # Check if can move to the position
+        if not self.can_reach(pos_X, pos_Y, B):
+            return False
+
+        # Make the move on a new board
+        new_board = copy.deepcopy(B)
+        
+        # Check if side would be in check move is made
+        piece = piece_at(self.pos_x, self.pos_y, new_board)
+        piece.pos_x = pos_X
+        piece.pos_y = pos_Y
+
+        # Remove a piece in that place if it would have been captured
+        captured_piece = piece_at(pos_X, pos_Y, new_board)
+        if captured_piece != None:
+            new_board[1].remove(captured_piece)
+
+        # Return True/False if so or not
+        if is_check(self.side, new_board):
+            return False
+        
+        return True
+
+        
+
+
     def move_to(self, pos_X : int, pos_Y : int, B: Board) -> Board:
         '''implement according to specification'''
 
