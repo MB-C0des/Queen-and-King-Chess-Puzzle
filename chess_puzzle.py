@@ -281,7 +281,20 @@ def conf2unicode(B: Board) -> str:
 
 def main() -> None:
     '''implement according to specification''' 
-    
+    board = None
+    filename = input("File name for initial configuration: ")
+    while board is None:
+        if filename == "QUIT":
+            exit()  
+        try:
+            board = read_board(filename)
+        except IOError:
+            filename = input("This is not a valid file. File name for initial configuration: ")
+            
+    # Once a valid board has been loaded, print the configuration as unicode
+    board_text = conf2unicode(board)
+    print("The initial configuration is: ")
+    print(board_text)
 
 if __name__ == '__main__': #keep this in
    main()
