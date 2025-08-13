@@ -275,6 +275,10 @@ def conf2unicode(B: Board) -> str:
                 # Black Queen
                 board[y][x] = "\u265B"
 
+    board = ["".join(row) for row in board]
+    final_board = "\n".join(board)
+    return final_board
+
 def main() -> None:
     '''implement according to specification''' 
     
