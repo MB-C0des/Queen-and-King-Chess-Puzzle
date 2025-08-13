@@ -243,7 +243,7 @@ def read_board(filename: str) -> Board:
         board = Board((board_width, pieces))
         return board
     except:
-        
+
         raise IOError
 
 def save_board(filename: str, B: Board) -> None:
@@ -255,10 +255,29 @@ def find_black_move(B: Board) -> tuple[Piece, int, int]:
 
 def conf2unicode(B: Board) -> str: 
     '''implement according to specification'''
+    board = [["\u2001" for x in range(B[0])] for y in range(B[0])]
 
+    for piece in B[1]:
+        y = B[0] - piece.pos_y
+        x = piece.pos_x - 1
+        if type(piece).__name__ == "King":
+            if piece.side == True:
+                # White King
+                board[y][x] = "\u2654"
+            else:
+                # Black King
+                board[y][x] = "\u265A"
+        else:
+            if piece.side == True:
+                # White Queen
+                board[y][x] = "\u2655"
+            else:
+                # Black Queen
+                board[y][x] = "\u265B"
 
 def main() -> None:
     '''implement according to specification''' 
+    
 
 if __name__ == '__main__': #keep this in
    main()
