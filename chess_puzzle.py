@@ -248,7 +248,20 @@ def read_board(filename: str) -> Board:
 
 def save_board(filename: str, B: Board) -> None:
     '''implement according to specification'''
+    lines = []
 
+    # Add the first line which is the total number of pieces on the board
+    lines.append(str(B[0]) + "\n")
+
+    white_pieces = [repr(piece) for piece in B[1] if piece.side == True]
+    black_pieces = [repr(piece) for piece in B[1] if piece.side == False]
+
+    # Add the second line which contains the white pieces as their text representations
+    lines.append(", ".join(white_pieces) + "\n")
+    lines.append(", ".join(black_pieces))
+
+    with open(filename, "w") as f:
+        f.writelines(lines)
 
 def find_black_move(B: Board) -> tuple[Piece, int, int]:
     '''implement according to specification'''
@@ -290,7 +303,7 @@ def main() -> None:
             board = read_board(filename)
         except IOError:
             filename = input("This is not a valid file. File name for initial configuration: ")
-            
+
     # Once a valid board has been loaded, print the configuration as unicode
     board_text = conf2unicode(board)
     print("The initial configuration is: ")
