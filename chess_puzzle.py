@@ -194,6 +194,24 @@ class King(Piece):
             pass
 
         return new_B
+    
+    def is_unable_to_move(self, B: Board) -> bool:
+        x = self.pos_x
+        y = self.pos_y
+
+        possible_moves = [(1, 1), (1, 0), (-1, 0), (-1, -1), (0, -1), (0, 1),
+                          (-1, 1), (1, -1)]
+
+        # Check that the King is unable to make moves in any direction
+        can_move = False
+        for move in possible_moves:
+            new_x = move[1] + x
+            new_y = move[1] + y
+            if self.can_move_to(new_x, new_y, B):
+                can_move = True
+                break
+
+        return not can_move
 
 def is_check(side: bool, B: Board) -> bool:
     '''implement according to specification'''
