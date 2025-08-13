@@ -66,6 +66,28 @@ class Queen(Piece):
             return False
 
         pointsInBetween = []
+        
+        # All the points between the path of the Queen and the target
+        step_x = 0 if dx == 0 else dx // abs(dx)
+        step_y = 0 if dy == 0 else dy // abs(dy)
+
+        new_point = (x + step_x, y + step_y)
+        target = (pos_X, pos_Y)
+
+        while (new_point != target):
+            pointsInBetween.append(new_point)
+            new_point = (new_point[0] + step_x, new_point[1] + step_y)
+
+        for place in pointsInBetween:
+            if is_piece_at(place[0], place[1], B):
+                return False
+
+        # Return False if the target position contains a piece of the same type
+        if is_piece_at(pos_X, pos_Y, B):
+            if piece_at(pos_X, pos_Y, B).side == self.side:
+                return False
+            
+        return True
 
     def can_move_to(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
