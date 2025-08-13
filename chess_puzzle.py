@@ -137,8 +137,27 @@ class Queen(Piece):
 class King(Piece):
     def __init__(self, pos_X : int, pos_Y : int, side_ : bool):
         '''implement according to specification'''
+        super().__init__(pos_X, pos_Y, side_)
+
     def can_reach(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
+        possible_moves = [(1, 1), (1, 0), (-1, 0), (-1, -1), (0, -1), (0, 1),
+                          (-1, 1), (1, -1)]
+
+        dx = pos_X - self.pos_x
+        dy = pos_Y - self.pos_y
+
+        # Return False if the target move is not one of the possible moves
+        if (dx, dy) not in possible_moves:
+            return False
+
+        # Return False if the target position contains a piece of the same type
+        if is_piece_at(pos_X, pos_Y, B):
+            if piece_at(pos_X, pos_Y, B).side == self.side:
+                return False
+
+        return True
+    
     def can_move_to(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
     def move_to(self, pos_X : int, pos_Y : int, B: Board) -> Board:
