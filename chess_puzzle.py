@@ -51,9 +51,16 @@ def piece_at(pos_X : int, pos_Y : int, B: Board) -> Piece:
 class Queen(Piece):
     def __init__(self, pos_X : int, pos_Y : int, side_ : bool):
         '''implement according to specification'''
+        super().__init__(pos_X, pos_Y, side_)
 	
     def can_reach(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
+        x = self.pos_x
+        y = self.pos_y
+
+        dx = pos_X - x
+        dy = pos_Y - y
+
     def can_move_to(self, pos_X : int, pos_Y : int, B: Board) -> bool:
         '''implement according to specification'''
     def move_to(self, pos_X : int, pos_Y : int, B: Board) -> Board:
