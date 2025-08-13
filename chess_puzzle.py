@@ -36,9 +36,17 @@ Board = tuple[int, list[Piece]]
 
 def is_piece_at(pos_X : int, pos_Y : int, B: Board) -> bool:
     '''implement according to specification''' 
+    for piece in B[1]:
+        if piece.pos_x == pos_X and piece.pos_y == pos_Y:
+            return True
+    return False # Piece is not in that position so return False
 	
 def piece_at(pos_X : int, pos_Y : int, B: Board) -> Piece:
     '''implement according to specification'''
+    for piece in B[1]:
+        if piece.pos_x == pos_X and piece.pos_y == pos_Y:
+            return piece 
+    return None # Piece is not in that position so return None
 
 class Queen(Piece):
     def __init__(self, pos_X : int, pos_Y : int, side_ : bool):
