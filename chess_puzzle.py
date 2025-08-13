@@ -114,12 +114,25 @@ class Queen(Piece):
         
         return True
 
-        
-
-
     def move_to(self, pos_X : int, pos_Y : int, B: Board) -> Board:
         '''implement according to specification'''
+        # Return a new board without affecting the original board by making a deepcopy 
+        new_B = copy.deepcopy(B)
+        new_piece = piece_at(self.pos_x, self.pos_y, new_B)
 
+        # Check if the move is valid
+        if new_piece.can_move_to(pos_X, pos_Y, new_B):
+            # Remove a piece in that place if it would have been captured
+            captured_piece = piece_at(pos_X, pos_Y, new_B)
+            if captured_piece != None:
+                new_B[1].remove(captured_piece)
+
+            # Move this piece to the new position
+            new_piece.pos_x = pos_X
+            new_piece.pos_y = pos_Y
+            pass
+
+        return new_B
 
 class King(Piece):
     def __init__(self, pos_X : int, pos_Y : int, side_ : bool):
