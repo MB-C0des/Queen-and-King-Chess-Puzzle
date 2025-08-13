@@ -224,6 +224,27 @@ def is_stalemate(side: bool, B: Board) -> bool:
 
 def read_board(filename: str) -> Board:
     '''implement according to specification'''
+    try:
+        file = open(filename, "r")
+        board_width = int(file.readline())
+        white_pieces = file.readline()
+        black_pieces = file.readline()
+        pieces = []
+
+        for piece in black_pieces.split(", "):
+            piece = piece.strip()
+            type = piece[0]
+            pos = location2index(piece[1:])
+            if type == "K":
+                pieces.append(King(pos[0], pos[1], False))
+            elif type == "Q":
+                pieces.append(Queen(pos[0], pos[1], False))
+    
+        board = Board((board_width, pieces))
+        return board
+    except:
+        
+        raise IOError
 
 def save_board(filename: str, B: Board) -> None:
     '''implement according to specification'''
