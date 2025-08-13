@@ -215,6 +215,19 @@ class King(Piece):
 
 def is_check(side: bool, B: Board) -> bool:
     '''implement according to specification'''
+    for piece in B[1]:
+        # If the piece is a King on side
+        if type(piece).__name__ == "King" and piece.side == side:
+            x = piece.pos_x
+            y = piece.pos_y
+            # Iterate through all the Queens on the other side
+            for queen in B[1]:
+                if type(queen).__name__ == "Queen" and queen.side != side:
+                    # If the other sides Queen can reach the King, return True
+                    if queen.can_reach(x, y, B):
+                        return True
+
+    return False
 
 def is_checkmate(side: bool, B: Board) -> bool:
     '''implement according to specification'''
