@@ -61,6 +61,10 @@ class Queen(Piece):
 
         dx = pos_X - x
         dy = pos_Y - y
+
+        # First check that the new location is not out of bounds of the board
+        if (pos_X < 1 or pos_Y < 1 or pos_X > B[0] or pos_Y > B[0]):
+            return False
         
         # Check if NOT vertical, horizontal or diagonal
         if not (x == pos_X or y == pos_Y or abs(dx) == abs(dy)):
@@ -147,6 +151,10 @@ class King(Piece):
 
         dx = pos_X - self.pos_x
         dy = pos_Y - self.pos_y
+
+        # First check that the new location is not out of bounds of the board
+        if (pos_X < 1 or pos_Y < 1 or pos_X > B[0] or pos_Y > B[0]):
+            return False
 
         # Return False if the target move is not one of the possible moves
         if (dx, dy) not in possible_moves:
