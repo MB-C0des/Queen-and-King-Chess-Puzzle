@@ -101,6 +101,24 @@ def test_can_reach3():
 def test_can_reach4():
     assert bq1.can_reach(3, 5, B1) == False
 
+# Check that the black King can reach in all steps adjacent to it
+def test_can_reach5():
+    possible_moves = [(1, 1), (1, 0), (-1, 0), (-1, -1), (0, -1), (0, 1),
+                      (-1, 1), (1, -1)]
+    for move in possible_moves:
+        x = move[0] + bk1.pos_x
+        y = move[1] + bk1.pos_y
+        assert bk1.can_reach(x, y, B1) == True
+
+
+# Check that a King cannot move more than one space
+def test_can_reach6():
+    impossible_moves = [(2, 0), (0, 2), (5, 5), (-3, -3), (2, -2), (-2, 2)]
+    for move in impossible_moves:
+        x = move[0] + bk1.pos_x
+        y = move[1] + bk1.pos_y
+        assert bk1.can_reach(x, y, B1) == False
+
 def test_can_move_to1():
     assert wq1.can_move_to(5,4, B1) == False
 
