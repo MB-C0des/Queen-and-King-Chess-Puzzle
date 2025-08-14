@@ -471,6 +471,16 @@ def main() -> None:
     print(f"Next move of Black is {last_pos}{new_pos}. The configuration after Black's move is:")
     print(conf2unicode(board))
 
+    # Check if it's a checkmate for white after this move
+    if is_checkmate(True, board):
+            print("Game over. Black wins.")
+            exit()
+        
+    # Check if it's a stalemate for white after this move
+    if is_stalemate(True, board):
+            print("Game over. Stalemate.")
+            exit()
+
     
 
             
