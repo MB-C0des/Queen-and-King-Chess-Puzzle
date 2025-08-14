@@ -5,6 +5,14 @@ from chess_puzzle import *
 def test_location2index1():
     assert location2index("e2") == (5,2)
 
+# Check for a piece at the bottom left corner
+def test_location2index2():
+    assert location2index("a1") == (1, 1)
+
+# Check for a piece at the top right corner of a 26x26 board
+def test_location2index3():
+    assert location2index("z26") == (26, 26)
+
 
 def test_index2location1():
     assert index2location(5,2) == "e2"
