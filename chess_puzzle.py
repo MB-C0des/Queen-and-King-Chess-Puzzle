@@ -1,4 +1,5 @@
 import copy
+import random
 
 def location2index(loc: str) -> tuple[int, int]:
     '''implement according to specification'''
@@ -324,6 +325,24 @@ def save_board(filename: str, B: Board) -> None:
 
 def find_black_move(B: Board) -> tuple[Piece, int, int]:
     '''implement according to specification'''
+
+# Get all the black pieces on the board and shuffle them randomly
+    randomised_black_pieces = [piece for piece in B[1] if piece.side == False]
+    random.shuffle(randomised_black_pieces)
+
+    # Iterate through the randomised list of pieces and for each attempt to do their possible moves
+    for piece in randomised_black_pieces:
+        possible_moves = []
+
+        # If the piece is a king
+        if type(piece).__name__ == "King":
+            # Make a list of the possible 8 moves a king can make
+            directions = [(1, 1), (1, 0), (-1, 0), (-1, -1), (0, -1), (0, 1),
+                          (-1, 1), (1, -1)]
+            for dir in directions:
+                x = piece.pos_x + dir[0]
+                y = piece.pos_y + dir[1]
+                possible_moves.append((x, y))    
 
 def conf2unicode(B: Board) -> str: 
     '''implement according to specification'''
