@@ -368,5 +368,23 @@ def main() -> None:
     print("The initial configuration is: ")
     print(board_text)
 
+     # White plays a move
+    is_valid_move = False
+    move = input("Next move of White: ")
+    while (not is_valid_move):
+        # Prompt the user to save and exit if the player types QUIT
+        if move == "QUIT":
+            filename = input("File name to store the configuration: ")
+            save_board(filename, board)
+            print("The game configuration saved.")
+            exit()
+        try:
+            # Split the user's input into starting and finishing locations
+            initial_pos = location2index(move[:2])
+            final_pos = location2index(move[2:])
+
+            
+
+
 if __name__ == '__main__': #keep this in
    main()
