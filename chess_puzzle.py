@@ -313,8 +313,8 @@ def save_board(filename: str, B: Board) -> None:
     # Add the first line which is the total number of pieces on the board
     lines.append(str(B[0]) + "\n")
 
-    white_pieces = [repr(piece) for piece in B[1] if piece.side == True]
-    black_pieces = [repr(piece) for piece in B[1] if piece.side == False]
+    white_pieces = [repr(piece)[:3] for piece in B[1] if piece.side == True]
+    black_pieces = [repr(piece)[:3] for piece in B[1] if piece.side == False]
 
     # Add the second line which contains the white pieces as their text representations
     lines.append(", ".join(white_pieces) + "\n")
@@ -452,20 +452,23 @@ def main() -> None:
     print("The configuration after White's move is: ")
     print(conf2unicode(board))
 
-    # Check if it's a checkmate / stalemate for black after this move
-    if is_checkmate(True, board):
-        print("Game over. White wins.")
-        exit()
+    # Check if it's a checkmate for black after this move
+    if is_checkmate(False, board):
+            print("Game over. White wins.")
+            exit()
 
-    if is_stalemate(True, board):
-        print("Game over. Stalemate.")
-        exit()
+    # Check if it's a stalemate for black after this move
+    if is_stalemate(False, board):
+            print("Game over. Stalemate.")
+            exit()
     
     # Compute a valid move for Black to perform
     (piece, x, y) = find_black_move(board)
+    last_pos = index2location(piece.pos_x, piece.pos_y)
+    new_pos = index2location(x, y)
     board = piece.move_to(x, y, board)
-    next_move = index2location(x, y)
-    print(f"Next move of Black is {next_move}. The configuration after Black's move is:")
+    
+    print(f"Next move of Black is {last_pos}{new_pos}. The configuration after Black's move is:")
     print(conf2unicode(board))
 
     
