@@ -353,7 +353,7 @@ def find_black_move(B: Board) -> tuple[Piece, int, int]:
             for dir in directions:
                 x = piece.pos_x
                 y = piece.pos_y
-                
+
                 while (x > 0 and y > 0 and x <= B[0] and y <= B[0]):
                     x += dir[0]
                     y += dir[1]
@@ -362,6 +362,14 @@ def find_black_move(B: Board) -> tuple[Piece, int, int]:
 
         # Shuffle the list of possible moves
         random.shuffle(possible_moves)   
+        
+        # Try each possible move in the shuffled list, the first one we land on that's possible will return as the next move
+        successful = False
+        for move in possible_moves:
+            (x, y) = move
+
+            if piece.can_move_to(x, y, B):
+                return ((piece, x, y))
 
 def conf2unicode(B: Board) -> str: 
     '''implement according to specification'''
