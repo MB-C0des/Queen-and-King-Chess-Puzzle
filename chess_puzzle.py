@@ -401,6 +401,21 @@ def main() -> None:
         # If the player gets here, it means break was not hit and everything should have been valid
         # Print the invalid move prompt
         move = input("This is not a valid move. Next move of White: ")
+    
+    # Print config after white's move
+    print("The configuration after White's move is: ")
+    print(conf2unicode(board))
+
+    # Check if it's a checkmate / stalemate for black after this move
+    if is_checkmate(True, board):
+        print("Game over. White wins.")
+        exit()
+
+    if is_stalemate(True, board):
+        print("Game over. Stalemate.")
+        exit()
+
+    
 
             
 
