@@ -236,3 +236,23 @@ def test_read_board2():
 
 def test_conf2unicode1():
     assert conf2unicode(B1).rstrip("\n") == "  ♔  \n   ♕ \n ♚  ♛\n     \n  ♕  "
+
+# Check for an empty board
+def test_conf2unicode2():
+    empty_board = (5, [])
+    assert conf2unicode(empty_board).rstrip(
+        "\n") == "     \n     \n     \n     \n     "
+
+
+# Check for boards full of pieces
+def test_conf2unicode3():
+    pieces = []
+
+    for x in range(1, 6):
+        for y in range(1, 6):
+            piece = Queen(x, y, True)
+            pieces.append(piece)
+
+    board = (5, pieces)
+    assert conf2unicode(board).rstrip(
+        "\n") == "♕♕♕♕♕\n♕♕♕♕♕\n♕♕♕♕♕\n♕♕♕♕♕\n♕♕♕♕♕"
