@@ -182,7 +182,17 @@ def test_is_checkmate3():
 # Check for a standard stalemate
 def test_is_stalemate1():
     assert is_stalemate(False, stalemate_board) == True
-    
+
+# Check that a board with a checkmate does NOT return a stalemate as true
+def test_is_stalemate2():
+    B2 = (5, [wk1, wq2, bq1, bk1])
+    assert is_stalemate(False, B2) == False
+
+# Check that an empty board is not a stalemate
+def test_is_stalemate3():
+    board = (5, [])
+    assert is_stalemate(False, board) == False
+
 def test_read_board1():
     B = read_board("board_examp.txt")
     assert B[0] == 5
