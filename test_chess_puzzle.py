@@ -87,6 +87,20 @@ def test_piece_at6():
 def test_can_reach1():
     assert wq1.can_reach(5,4, B1) == True
 
+# Check that the white Queen can reach the black Queen
+def test_can_reach2():
+    assert wq1.can_reach(5, 3, B1) == True
+
+
+# Check that the black Queen can reach the white Queen
+def test_can_reach3():
+    assert bq1.can_reach(4, 4, B1) == True
+
+
+# Check that the black Queen cannot reach the white King (blocked by white King)
+def test_can_reach4():
+    assert bq1.can_reach(3, 5, B1) == False
+
 def test_can_move_to1():
     assert wq1.can_move_to(5,4, B1) == False
 
