@@ -383,6 +383,25 @@ def main() -> None:
             initial_pos = location2index(move[:2])
             final_pos = location2index(move[2:])
 
+            # Check there is a piece at the initial location they specified
+            if is_piece_at(initial_pos[0], initial_pos[1], board):
+                piece = piece_at(initial_pos[0], initial_pos[1], board)
+
+                # Check that the piece we have chosen is white and can move to the final location
+                if piece.side == True and piece.can_move_to(
+                        final_pos[0], final_pos[1], board):
+                    board = piece.move_to(final_pos[0], final_pos[1], board)
+                    # If we get this far, everything is valid so break out of the loop
+                    is_valid_move = True
+                    break
+        except:
+            # Do nothing, this catches if there is an error when giving invalid locations
+            pass
+
+        # If the player gets here, it means break was not hit and everything should have been valid
+        # Print the invalid move prompt
+        move = input("This is not a valid move. Next move of White: ")
+
             
 
 
