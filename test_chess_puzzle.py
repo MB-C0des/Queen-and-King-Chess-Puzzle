@@ -47,6 +47,20 @@ B1 = (5, [wq1, wk1, wq2, bq1, bk1])
 def test_is_piece_at1():
     assert is_piece_at(2,2, B1) == False
 
+# Check for a piece being on a board
+def test_is_piece_at2():
+    assert is_piece_at(4, 4, B1) == True
+
+
+# Check there isn't a piece on a location outside the board
+def test_is_piece_at3():
+    assert is_piece_at(6, 6, B1) == False
+
+
+# Check there isn't a piece on a negative location
+def test_is_piece_at4():
+    assert is_piece_at(-2, -3, B1) == False
+
 def test_piece_at1():
     assert piece_at(3,1, B1) == wq2
 
