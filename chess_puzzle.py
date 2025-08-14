@@ -357,7 +357,6 @@ def find_black_move(B: Board) -> tuple[Piece, int, int]:
                 while (x > 0 and y > 0 and x <= B[0] and y <= B[0]):
                     x += dir[0]
                     y += dir[1]
-                    print((x, y))
                     possible_moves.append((x, y))
 
         # Shuffle the list of possible moves
@@ -413,73 +412,73 @@ def main() -> None:
     board_text = conf2unicode(board)
     print("The initial configuration is: ")
     print(board_text)
+    while True:
+        # White plays a move
+        is_valid_move = False
+        move = input("Next move of White: ")
+        while (not is_valid_move):
+            # Prompt the user to save and exit if the player types QUIT
+            if move == "QUIT":
+                filename = input("File name to store the configuration: ")
+                save_board(filename, board)
+                print("The game configuration saved.")
+                exit()
+            try:
+                # Split the user's input into starting and finishing locations
+                initial_pos = location2index(move[:2])
+                final_pos = location2index(move[2:])
 
-     # White plays a move
-    is_valid_move = False
-    move = input("Next move of White: ")
-    while (not is_valid_move):
-        # Prompt the user to save and exit if the player types QUIT
-        if move == "QUIT":
-            filename = input("File name to store the configuration: ")
-            save_board(filename, board)
-            print("The game configuration saved.")
-            exit()
-        try:
-            # Split the user's input into starting and finishing locations
-            initial_pos = location2index(move[:2])
-            final_pos = location2index(move[2:])
+                # Check there is a piece at the initial location they specified
+                if is_piece_at(initial_pos[0], initial_pos[1], board):
+                    piece = piece_at(initial_pos[0], initial_pos[1], board)
 
-            # Check there is a piece at the initial location they specified
-            if is_piece_at(initial_pos[0], initial_pos[1], board):
-                piece = piece_at(initial_pos[0], initial_pos[1], board)
+                    # Check that the piece we have chosen is white and can move to the final location
+                    if piece.side == True and piece.can_move_to(
+                            final_pos[0], final_pos[1], board):
+                        board = piece.move_to(final_pos[0], final_pos[1], board)
+                        # If we get this far, everything is valid so break out of the loop
+                        is_valid_move = True
+                        break
+            except:
+                # Do nothing, this catches if there is an error when giving invalid locations
+                pass
 
-                # Check that the piece we have chosen is white and can move to the final location
-                if piece.side == True and piece.can_move_to(
-                        final_pos[0], final_pos[1], board):
-                    board = piece.move_to(final_pos[0], final_pos[1], board)
-                    # If we get this far, everything is valid so break out of the loop
-                    is_valid_move = True
-                    break
-        except:
-            # Do nothing, this catches if there is an error when giving invalid locations
-            pass
-
-        # If the player gets here, it means break was not hit and everything should have been valid
-        # Print the invalid move prompt
-        move = input("This is not a valid move. Next move of White: ")
-    
-    # Print config after white's move
-    print("The configuration after White's move is: ")
-    print(conf2unicode(board))
-
-    # Check if it's a checkmate for black after this move
-    if is_checkmate(False, board):
-            print("Game over. White wins.")
-            exit()
-
-    # Check if it's a stalemate for black after this move
-    if is_stalemate(False, board):
-            print("Game over. Stalemate.")
-            exit()
-    
-    # Compute a valid move for Black to perform
-    (piece, x, y) = find_black_move(board)
-    last_pos = index2location(piece.pos_x, piece.pos_y)
-    new_pos = index2location(x, y)
-    board = piece.move_to(x, y, board)
-    
-    print(f"Next move of Black is {last_pos}{new_pos}. The configuration after Black's move is:")
-    print(conf2unicode(board))
-
-    # Check if it's a checkmate for white after this move
-    if is_checkmate(True, board):
-            print("Game over. Black wins.")
-            exit()
+            # If the player gets here, it means break was not hit and everything should have been valid
+            # Print the invalid move prompt
+            move = input("This is not a valid move. Next move of White: ")
         
-    # Check if it's a stalemate for white after this move
-    if is_stalemate(True, board):
-            print("Game over. Stalemate.")
-            exit()
+        # Print config after white's move
+        print("The configuration after White's move is: ")
+        print(conf2unicode(board))
+
+        # Check if it's a checkmate for black after this move
+        if is_checkmate(False, board):
+                print("Game over. White wins.")
+                exit()
+
+        # Check if it's a stalemate for black after this move
+        if is_stalemate(False, board):
+                print("Game over. Stalemate.")
+                exit()
+        
+        # Compute a valid move for Black to perform
+        (piece, x, y) = find_black_move(board)
+        last_pos = index2location(piece.pos_x, piece.pos_y)
+        new_pos = index2location(x, y)
+        board = piece.move_to(x, y, board)
+        
+        print(f"Next move of Black is {last_pos}{new_pos}. The configuration after Black's move is:")
+        print(conf2unicode(board))
+
+        # Check if it's a checkmate for white after this move
+        if is_checkmate(True, board):
+                print("Game over. Black wins.")
+                exit()
+            
+        # Check if it's a stalemate for white after this move
+        if is_stalemate(True, board):
+                print("Game over. Stalemate.")
+                exit()
 
     
 
