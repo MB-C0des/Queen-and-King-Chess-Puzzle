@@ -64,6 +64,26 @@ def test_is_piece_at4():
 def test_piece_at1():
     assert piece_at(3,1, B1) == wq2
 
+# Check for the white King
+def test_piece_at2():
+    assert piece_at(3, 5, B1) == wk1
+
+# Check for the black Queen
+def test_piece_at3():
+    assert piece_at(5, 3, B1) == bq1
+
+# Check for the black King
+def test_piece_at4():
+    assert piece_at(2, 3, B1) == bk1
+
+# Check for the absence of a piece
+def test_piece_at5():
+    assert piece_at(1, 1, B1) == None
+
+# Check outside the board
+def test_piece_at6():
+    assert piece_at(6, 6, B1) == None
+
 def test_can_reach1():
     assert wq1.can_reach(5,4, B1) == True
 
