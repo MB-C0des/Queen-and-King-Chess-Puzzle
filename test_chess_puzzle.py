@@ -13,6 +13,14 @@ def test_location2index2():
 def test_location2index3():
     assert location2index("z26") == (26, 26)
 
+# Check for a piece at the bottom right corner
+def test_location2index4():
+    assert location2index("z1") == (26, 1)
+
+# Check for a piece at the top left corner
+def test_location2index5():
+    assert location2index("a26") == (1, 26)
+
 
 def test_index2location1():
     assert index2location(5,2) == "e2"
