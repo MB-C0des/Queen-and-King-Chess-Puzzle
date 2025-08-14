@@ -122,6 +122,15 @@ def test_can_reach6():
 def test_can_move_to1():
     assert wq1.can_move_to(5,4, B1) == False
 
+# Check that the black King cannot move right which would place it in check
+def test_can_move_to2():
+    assert wk1.can_move_to(3, 3, B1) == False
+
+
+# Check that the black King can move down-left
+def test_can_move_to3():
+    assert bk1.can_move_to(1, 2, B1) == True
+
 def test_move_to1():
     wk1a = King(4,5, True)
 
