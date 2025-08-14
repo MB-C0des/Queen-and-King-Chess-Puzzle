@@ -33,6 +33,14 @@ def test_index2location2():
 def test_index2location3():
     assert index2location(26, 26) == "z26"
 
+# Check for a piece at the bottom right corner
+def test_index2location4():
+    assert index2location(26, 1) == "z1"
+
+# Check for a piece at the top left corner of a 26x26 board
+def test_index2location5():
+    assert index2location(1, 26) == "a26"
+
 
 wq1 = Queen(4,4,True)
 wk1 = King(3,5,True)
