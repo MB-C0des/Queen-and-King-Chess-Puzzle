@@ -250,6 +250,17 @@ def test_read_board2():
                 found = True
         assert found
 
+# Check that trying to read a non existent file results in an error
+def test_read_board3():
+    with pytest.raises(IOError):
+        B = read_board("nonexistent_file.txt")
+
+
+# Check that trying to read a corruped file results in an error
+def test_read_board4():
+    with pytest.raises(IOError):
+        B = read_board("board_corrupted.txt")
+        
 def test_conf2unicode1():
     assert conf2unicode(B1).rstrip("\n") == "  ♔  \n   ♕ \n ♚  ♛\n     \n  ♕  "
 
