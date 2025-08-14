@@ -414,6 +414,13 @@ def main() -> None:
     if is_stalemate(True, board):
         print("Game over. Stalemate.")
         exit()
+    
+    # Compute a valid move for Black to perform
+    (piece, x, y) = find_black_move(board)
+    board = piece.move_to(x, y, board)
+    next_move = index2location(x, y)
+    print(f"Next move of Black is {next_move}. The configuration after Black's move is:")
+    print(conf2unicode(board))
 
     
 
