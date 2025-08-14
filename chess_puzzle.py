@@ -342,7 +342,26 @@ def find_black_move(B: Board) -> tuple[Piece, int, int]:
             for dir in directions:
                 x = piece.pos_x + dir[0]
                 y = piece.pos_y + dir[1]
-                possible_moves.append((x, y))    
+                possible_moves.append((x, y)) 
+        # If the piece is a queen
+        else:
+            # Generate all the possible positions it can move to, based on the eight directions it can move in
+            # Ignoring moves that are invalid for now
+            directions = [(1, 1), (1, 0), (-1, 0), (-1, -1), (0, -1), (0, 1),
+                          (-1, 1), (1, -1)]
+
+            for dir in directions:
+                x = piece.pos_x
+                y = piece.pos_y
+                
+                while (x > 0 and y > 0 and x <= B[0] and y <= B[0]):
+                    x += dir[0]
+                    y += dir[1]
+                    print((x, y))
+                    possible_moves.append((x, y))
+
+        # Shuffle the list of possible moves
+        random.shuffle(possible_moves)   
 
 def conf2unicode(B: Board) -> str: 
     '''implement according to specification'''
