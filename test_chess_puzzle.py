@@ -159,6 +159,10 @@ def test_is_check1():
     B2 = (5, [wk1, wq2, bq1, bk1])
     assert is_check(True, B2) == True
 
+# Check that the King isn't in check when a piece on their side is blocking the checking path
+def test_is_check2():
+    assert is_check(True, B1) == False
+
 def test_is_checkmate1():
     B2 = (5, [wk1, wq2, bq1, bk1])
     assert is_checkmate(True, B2) == False
