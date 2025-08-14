@@ -5,6 +5,7 @@ from chess_puzzle import *
 def test_location2index1():
     assert location2index("e2") == (5,2)
 
+
 def test_index2location1():
     assert index2location(5,2) == "e2"
 

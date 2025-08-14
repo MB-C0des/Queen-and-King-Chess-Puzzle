@@ -281,6 +281,15 @@ def read_board(filename: str) -> Board:
         black_pieces = file.readline()
         pieces = []
 
+        for piece in white_pieces.split(", "):
+            piece = piece.strip()
+            type = piece[0]
+            pos = location2index(piece[1:])
+            if type == "K":
+                pieces.append(King(pos[0], pos[1], True))
+            elif type == "Q":
+                pieces.append(Queen(pos[0], pos[1], True))
+
         for piece in black_pieces.split(", "):
             piece = piece.strip()
             type = piece[0]
